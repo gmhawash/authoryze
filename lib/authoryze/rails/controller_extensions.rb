@@ -13,8 +13,8 @@ module Rails
 
     def can
       @__can_authoryze ||= OpenStruct.new begin
-        if respond_to?(:current_user) && current_user
-          current_user.roles.map(&:permissions).inject({}) {|r,e| r.merge(e)}
+        if resource = send(Authoryze.resource_accessor)
+          Hash[resource.send(Authoryze.permissions_collection).map{|x| [x,true]}]
         end
       end
     end
