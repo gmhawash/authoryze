@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Authoryze::VERSION
   spec.authors       = ["Maher Hawash"]
   spec.email         = ["gmhawash@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Provides matrix based and role level authorization}
+  spec.summary       = %q{matrix based and role level authorization}
   spec.homepage      = ""
   spec.license       = "MIT"
 
