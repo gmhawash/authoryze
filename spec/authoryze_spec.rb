@@ -1,11 +1,33 @@
-require 'spec_helper'
-class FakeController < ActionController::Base
-end
-
 describe Authoryze do
-  subject {FakeController.new}
 
-  describe '#can' do
+  describe '.configure' do
+    it 'yields configuration if block given' do
+      configuration = double
+      described_class.stub(:configuration => configuration)
+      described_class.should_receive(:configure).and_yield(configuration)
+      described_class.configure {|c| }
+    end
+
+    it 'raises an error if block not given' do
+      expect{
+        described_class.configure
+      }.to raise_error ArgumentError
+    end
+  end
+
+  describe '.configuration' do
+    it 'returns a new configuration object' do
+      Authoryze::Configuration.should_receive(:new).and_call_original
+      described_class.configuration.should be_an_instance_of Authoryze::Configuration
+    end
+
+    it 'returns memoized version' do
+      configuration = described_class.configuration
+      described_class.configuration.should == configuration
+    end
+  end
+
+  describe '#can', :pending => true do
     it 'returns true if user has permission' do
       role = Role.create :name => 'boss', :permissions => {'manage_peons?' => true}
       user = create :user, :roles => [role]

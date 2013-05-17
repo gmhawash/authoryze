@@ -29,7 +29,7 @@ module Authoryze
     #   end
     # @see Authoryze::Configuration
     def configure(&block)
-      unless block
+      unless block_given?
         raise ArgumentError.new("You tried to .configure without a block!")
       end
       yield configuration
