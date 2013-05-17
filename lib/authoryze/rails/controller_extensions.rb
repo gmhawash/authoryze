@@ -20,9 +20,15 @@ module Rails
     end
 
     module ClassMethods
+      def authoryze!(*args)
+        options = args.extract_options!
+        filter = Authoryze::Rails::AuthoryzeFilter.new(self)
+        self.before_filter(filter, options.slice(:only, :except, :if, :unless))
+      end
+
       def can(*args)
         options = args.extract_options!
-        filter = Authoryze::Rails::Filter.new(args)
+        filter = Authoryze::Rails::CanFilter.new(args)
         self.before_filter(filter, options.slice(:only, :except, :if, :unless))
       end
     end
