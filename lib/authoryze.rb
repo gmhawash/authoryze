@@ -34,6 +34,10 @@ module Authoryze
       end
       yield configuration
     end
+
+    def reset!
+      @configuration = nil
+    end
   end
 end
 

@@ -1,11 +1,6 @@
 describe Authoryze::Rails do
   describe '.setup' do
     it 'injects ControllerExtensions into ActionController::Base' do
-<<<<<<< HEAD
-      described_class.should_receive(:defined?).with(Rails).and_return(true)
-      described_class.should_receive(:defined?).with(ActionController::Base).and_return(true)
-
-=======
       stub_const("Rails", :rails)
       stub_const("ActionController::Base", Class.new)
       stub_const("Authoryze::Rails::ControllerExtensions", Class.new)
@@ -27,7 +22,6 @@ describe Authoryze::Rails do
       described_class.should_not_receive(:require).any_number_of_times
 
       described_class.setup
->>>>>>> Test rails_spec injection into ActionController::Base
     end
   end
 end

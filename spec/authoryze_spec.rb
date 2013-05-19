@@ -16,6 +16,10 @@ describe Authoryze do
   end
 
   describe '.configuration' do
+    before :each do
+      Authoryze.reset!
+    end
+
     it 'returns a new configuration object' do
       Authoryze::Configuration.should_receive(:new).and_call_original
       described_class.configuration.should be_an_instance_of Authoryze::Configuration
