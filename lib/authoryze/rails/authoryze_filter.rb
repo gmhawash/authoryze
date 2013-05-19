@@ -15,7 +15,9 @@ module Rails
     private
     def matches_permission?
       [:manage, action].any? do |permission|
-        @controller.send("%s_%s?" % [permission, @controller_name]
+        permission = "%s_%s?" % [permission, @controller_name]
+        @controller.can.respond_to?(permission) &&
+        @controller.can.send(permission)
       end
     end
 

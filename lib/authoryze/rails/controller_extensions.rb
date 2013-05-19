@@ -14,7 +14,7 @@ module Rails
     def can
       @__can_authoryze ||= OpenStruct.new begin
         if resource = send(Authoryze.resource_accessor)
-          Hash[resource.send(Authoryze.permissions_collection).map{|x| [x,true]}]
+          Hash[resource.send(Authoryze.permissions_collection).map{|x| ['%s?' % x,true]}]
         end
       end
     end
